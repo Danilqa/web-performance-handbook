@@ -121,7 +121,7 @@ by the area above the curve, which will approach 0 as the page loads faster.
 Measurement Unit: Milliseconds (ms)
 
 Measures the time between [FCP](#FCP) and [TTI](#TTI) when the main thread was blocked for long enough to prevent input responsiveness. 
-more details specifically, it's the sum of the blocking time for each long task (>50 ms). For web frameworks, this time is 
+More specifically, it's the sum of the blocking time for each long task (>50 ms). For web frameworks, this time is 
 usually consumed by virtual DOM renders and hydration.
 
 [more details](https://web.dev/articles/tbt)
@@ -135,7 +135,7 @@ usually consumed by virtual DOM renders and hydration.
 Measurement Unit: Milliseconds (ms)
 
 Measures the time when than at least for 5 seconds where weren't long tasks (>50ms) and
-no more details than two in-flight network GET requests.
+no more than two in-flight network GET requests.
 
 [more details](https://web.dev/articles/tti)
 
