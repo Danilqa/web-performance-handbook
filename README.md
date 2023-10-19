@@ -1,5 +1,8 @@
 # Performance Metrics Glossary
 
+<img align="right" width="100" height="100" title="Logo"
+src="./static/images/logo.png" />
+
 This glossary contains a list of the most common metrics which may appear in articles, DevTools, Lighthouse, and other
 various tools for working with web performance. Everything is sorted in the alphabetical order.
 
