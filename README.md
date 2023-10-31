@@ -1,4 +1,4 @@
-# Performance Handbook
+# Web Performance Handbook
 
 <img align="right" width="100" height="100" title="Logo"
 src="./static/images/logo.png" />
