@@ -5,6 +5,21 @@ src="./static/images/logo.png" />
 
 Support the project by giving it a star! ⭐
 
+## Table of Contents
+
+* [Tools](#tools)
+* [Metrics](#metrics)
+
+## Tools
+
+### Treo - Site Speed
+
+Allows viewing annual reports for websites based on Light House and CrUX (Chrome User Experience Report) metrics. 
+Filters can also be set, such as internet connection speed, location, and device. Uses real user data. Very useful for observing trends 
+and metrics specific to certain user types.
+
+[link](https://treo.sh/sitespeed)
+
 ## Metrics
 
 This is a list of the most common metrics which may appear in articles, DevTools, Lighthouse, and other
