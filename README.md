@@ -1,18 +1,20 @@
-# Performance Metrics Glossary
+# Performance Handbook
 
 <img align="right" width="100" height="100" title="Logo"
 src="./static/images/logo.png" />
 
-This glossary contains a list of the most common metrics which may appear in articles, DevTools, Lighthouse, and other
+Support the project by giving it a star! ⭐
+
+## Metrics
+
+This is a list of the most common metrics which may appear in articles, DevTools, Lighthouse, and other
 various tools for working with web performance. Everything is sorted in the alphabetical order.
 
 The factual data is primarily sourced from MDN, web.dev and w3c, however the short description has been rewritten and enhanced.
 
-Support the project by giving it a star! ⭐
-
 ---
 
-## CLS
+### CLS
 
 **Cumulative Layout Shift**
 
@@ -26,7 +28,7 @@ during the loading process, which causes a shift in the elements below.
 
 ---
 
-## DCL
+### DCL
 
 **DOMContentLoaded**
 
@@ -39,7 +41,7 @@ downloaded and executed. It doesn't wait for resources.
 
 ---
 
-## FCP
+### FCP
 
 **First Contentful Paint**
 
@@ -52,7 +54,7 @@ This includes text, images, background images, SVG elements, and non-white canva
 
 ---
 
-## FID
+### FID
 
 **First Input Delay**
 
@@ -65,7 +67,7 @@ include clicks, hovers, touches, and other user events.
 
 ---
 
-## FP
+### FP
 
 **First Paint**
 
@@ -75,7 +77,19 @@ Marks the first time the browser renders anything visually different from the de
 
 ---
 
-## L
+### INP
+
+**Interaction to Next Paint**
+
+Measurement Unit: Milliseconds (ms)
+
+Measures the time it takes for the browser to paint the next frame after a user interaction. 
+
+[more details](https://web.dev/articles/inp)
+
+---
+
+### L
 
 **On Load**
 
@@ -88,7 +102,7 @@ It includes all dependent resources: stylesheets, scripts, iframes, and images.
 
 ---
 
-## LCP
+### LCP
 
 **Largest Contentful Paint**
 
@@ -101,7 +115,7 @@ background images, SVG, video, and text.
 
 ---
 
-## SI
+### SI
 
 **Speed Index**
 
@@ -114,7 +128,7 @@ by the area above the curve, which will approach 0 as the page loads faster.
 
 ---
 
-## TBT
+### TBT
 
 **Total Blocking Time**
 
@@ -128,7 +142,7 @@ usually consumed by virtual DOM renders and hydration.
 
 ---
 
-## TTI
+### TTI
 
 **Time to Interactive**
 
@@ -141,7 +155,7 @@ no more than two in-flight network GET requests.
 
 ---
 
-## TTFB
+### TTFB
 
 **Time To First Byte**
 
