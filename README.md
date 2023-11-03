@@ -11,7 +11,7 @@ Support the project by giving it a star! ⭐
 ## Table of Contents
 
 * [Tools](#tools)
-  * [Treo — Site Speed](#treo---site-speed)
+  * [Treo — Site Speed](#treo--site-speed)
   * [Web Vitals (extension)](#web-vitals-extension)
 * [Learning Resources](#learning-resources)
   * [Browser Rendering Optimization Course](#browser-rendering-optimization-course)
