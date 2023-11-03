@@ -3,8 +3,9 @@
 <img align="right" width="100" height="100" title="Logo"
 src="./static/images/logo.png" />
 
-This guide helps to quickly understand the topic and start improving performance. It contains a metrics glossary, 
+This handbook helps to quickly understand the topic and start improving performance. It contains a metrics glossary, 
 a compilation of useful tools, and a catalog of necessary materials.
+
 Support the project by giving it a star! ⭐
 
 ## Table of Contents
@@ -13,7 +14,7 @@ Support the project by giving it a star! ⭐
   * [Treo — Site Speed](#treo---site-speed)
   * [Web Vitals (extension)](#web-vitals-extension)
 * [Learning Resources](#learning-resources)
-  * [Browser Rendering Optimization Course](#browser-rendering-optimization)
+  * [Browser Rendering Optimization Course](#browser-rendering-optimization-course)
   * [Web App Performance Course](#web-app-performance-course)
 * [Metrics](#metrics)
   * [CLS — Cumulative Layout Shift](#cls)
