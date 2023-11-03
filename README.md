@@ -3,22 +3,70 @@
 <img align="right" width="100" height="100" title="Logo"
 src="./static/images/logo.png" />
 
+This guide helps to quickly understand the topic and start improving performance. It contains a metrics glossary, 
+a compilation of useful tools, and a catalog of necessary materials.
 Support the project by giving it a star! ⭐
 
 ## Table of Contents
 
 * [Tools](#tools)
+  * [Treo — Site Speed](#treo---site-speed)
+  * [Web Vitals (extension)](#web-vitals-extension)
+* [Learning Resources](#learning-resources)
+  * [Browser Rendering Optimization Course](#browser-rendering-optimization)
+  * [Web App Performance Course](#web-app-performance-course)
 * [Metrics](#metrics)
+  * [CLS — Cumulative Layout Shift](#cls)
+  * [DCL — DOMContentLoaded](#dcl)
+  * [FCP — First Contentful Paint](#fcp)
+  * [FID — First Input Delay](#fid)
+  * [FP — First Paint](#fp)
+  * [INP — First Input Delay](#inp)
+  * [L — On Load](#l)
+  * [LCP — Largest Contentful Paint](#lcp)
+  * [SI — Speed Index](#si)
+  * [TBT — Total Blocking Time](#tbt)
+  * [TTI — Time to Interactive](#tti)
+  * [TTFB — Time To First Byte](#ttfb)
+
+---
 
 ## Tools
 
-### Treo - Site Speed
+### Treo — Site Speed
+
+How to view historical performance data of real users?
 
 Allows viewing annual reports for websites based on Light House and CrUX (Chrome User Experience Report) metrics. 
 Filters can also be set, such as internet connection speed, location, and device. Uses real user data. Very useful for observing trends 
 and metrics specific to certain user types.
 
 [link](https://treo.sh/sitespeed)
+
+### Web Vitals (extension)
+
+Collect metrics such as [**INP**](#INP), [LCP](#LCP), [CLS](#CLS), [FIP](#FIP), [FCP](#FCP), and [TTFB](#TTFB) in real-time and easily view them in a popup. 
+Enabling logging in options can assist in debugging [INP](#INP).
+
+[link](https://chrome.google.com/webstore/detail/web-vitals/ahfhijdlegdabablpippeagghigmibma/)
+
+---
+
+## Learning Resources
+
+### Browser Rendering Optimization Course
+
+Provides a solid basis for understanding how a browser renders a document and what happens behind the scenes.
+
+[link](https://www.udacity.com/course/browser-rendering-optimization--ud860)
+
+### Web App Performance Course
+
+Reveals many subtleties and working practices about optimization that are not usually written about. 
+
+[link](https://frontendmasters.com/courses/web-app-performance/)
+
+---
 
 ## Metrics
 
@@ -27,7 +75,6 @@ various tools for working with web performance. Everything is sorted in the alph
 
 The factual data is primarily sourced from MDN, web.dev and w3c, however the short description has been rewritten and enhanced.
 
----
 
 ### CLS
 
@@ -41,8 +88,6 @@ during the loading process, which causes a shift in the elements below.
 
 [more details](https://web.dev/articles/cls)
 
----
-
 ### DCL
 
 **DOMContentLoaded**
@@ -53,8 +98,6 @@ Refers to the moment in a webpage's loading process when the DOM is completely p
 downloaded and executed. It doesn't wait for resources.
 
 [more details](https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event)
-
----
 
 ### FCP
 
@@ -67,8 +110,6 @@ This includes text, images, background images, SVG elements, and non-white canva
 
 [more details](https://web.dev/articles/fcp)
 
----
-
 ### FID
 
 **First Input Delay**
@@ -80,8 +121,6 @@ include clicks, hovers, touches, and other user events.
 
 [more details](https://web.dev/articles/fid)
 
----
-
 ### FP
 
 **First Paint**
@@ -89,8 +128,6 @@ include clicks, hovers, touches, and other user events.
 Measurement Unit: Milliseconds (ms)
 
 Marks the first time the browser renders anything visually different from the default background color of the body.
-
----
 
 ### INP
 
@@ -101,8 +138,6 @@ Measurement Unit: Milliseconds (ms)
 Measures the time it takes for the browser to paint the next frame after a user interaction. 
 
 [more details](https://web.dev/articles/inp)
-
----
 
 ### L
 
@@ -115,8 +150,6 @@ It includes all dependent resources: stylesheets, scripts, iframes, and images.
 
 [more details](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event)
 
----
-
 ### LCP
 
 **Largest Contentful Paint**
@@ -128,8 +161,6 @@ background images, SVG, video, and text.
 
 [more details](https://web.dev/articles/lcp)
 
----
-
 ### SI
 
 **Speed Index**
@@ -140,8 +171,6 @@ Measures how swiftly the contents of a page are visually populated. Technically,
 by the area above the curve, which will approach 0 as the page loads faster.
 
 [more details](https://developer.mozilla.org/en-US/docs/Glossary/Speed_index)
-
----
 
 ### TBT
 
@@ -155,8 +184,6 @@ usually consumed by virtual DOM renders and hydration.
 
 [more details](https://web.dev/articles/tbt)
 
----
-
 ### TTI
 
 **Time to Interactive**
@@ -168,8 +195,6 @@ no more than two in-flight network GET requests.
 
 [more details](https://web.dev/articles/tti)
 
----
-
 ### TTFB
 
 **Time To First Byte**
@@ -179,5 +204,3 @@ Measurement Unit: Milliseconds (ms)
 Measures when the first byte of data from the web server reaches the browser.
 
 [more details](https://web.dev/articles/ttfb)
-
----
