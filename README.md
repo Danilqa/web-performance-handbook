@@ -13,6 +13,8 @@ Support the project by giving it a star! ⭐
 * [Tools](#tools)
   * [Treo — Site Speed](#treo--site-speed)
   * [Web Vitals (extension)](#web-vitals-extension)
+  * [PageSpeed Insights](#pagespeed-insights)
+  * [WebPageTest](#webpagetest)
 * [Learning Resources](#learning-resources)
   * [Browser Rendering Optimization Course](#browser-rendering-optimization-course)
   * [Web App Performance Course](#web-app-performance-course)
@@ -50,6 +52,20 @@ Collect metrics such as [**INP**](#INP), [LCP](#LCP), [CLS](#CLS), [FIP](#FIP), 
 Enabling logging in options can assist in debugging [INP](#INP).
 
 [link](https://chrome.google.com/webstore/detail/web-vitals/ahfhijdlegdabablpippeagghigmibma/)
+
+### PageSpeed Insights
+
+Allows you to conduct Lighthouse performance tests remotely, in a more realistic environment. Can be used for taking 
+more objective measurements, as computer powers vary among teammates. Especially, developers tend to have significantly 
+more powerful computers than the general market.
+
+[link](https://pagespeed.web.dev)
+
+### WebPageTest
+
+The same as previous, but on steroids. More options, more metrics, more data. 
+
+[link](https://www.webpagetest.org/)
 
 ---
 
