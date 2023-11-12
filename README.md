@@ -6,7 +6,7 @@ src="./static/images/logo.png" />
 This handbook helps to quickly understand the topic and start improving performance. It contains a metrics glossary, 
 a compilation of useful tools, and a catalog of necessary materials.
 
-Support the project by giving it a star! ⭐
+Support and bookmark the project by giving it a star! ⭐
 
 ## Table of Contents
 
@@ -15,6 +15,11 @@ Support the project by giving it a star! ⭐
   * [Web Vitals (extension)](#web-vitals-extension)
   * [PageSpeed Insights](#pagespeed-insights)
   * [WebPageTest](#webpagetest)
+  * [Lighthouse](#lighthouse)
+  * [DevTools Performance](#devtools-performance-with-experimental-features)
+* [React Tools](#react-tools)
+  * [Why Did You Render](#why-did-you-render)
+  * [React DevTools Profiler](#react-devtools-profiler)
 * [Learning Resources](#learning-resources)
   * [Browser Rendering Optimization Course](#browser-rendering-optimization-course)
   * [Web App Performance Course](#web-app-performance-course)
@@ -57,15 +62,53 @@ Enabling logging in options can assist in debugging [INP](#INP).
 
 Allows you to conduct Lighthouse performance tests remotely, in a more realistic environment. Can be used for taking 
 more objective measurements, as computer powers vary among teammates. Especially, developers tend to have significantly 
-more powerful computers than the general market.
+more powerful computers than the general market. Also, for popular websites, it provides data from the CrUX report.
 
 [link](https://pagespeed.web.dev)
 
 ### WebPageTest
 
-The same as previous, but on steroids. More options, more metrics, more data. 
+The same as previous, but on steroids. Allows you to set up a testing environment: location, browser, its available 
+functionality, connection speed, etc. Can record a video of the loading process, providing more understandable and 
+detailed reports on the webpage loading process and requests.
 
 [link](https://www.webpagetest.org/)
+
+### Lighthouse
+
+A tool designed for assessing the quality of a web page, focusing on core vitals metrics, SEO, and accessibility.
+It is built into Chrome DevTools and can be also used as a CLI tool, making it especially useful for measuring 
+performance during CI processes. Additionally, it offers practical suggestions to enhance the quality and loading 
+speed of the page.
+
+### DevTools Performance (with experimental features)
+
+Record and analyze the performance of a page. It allows you to see the loading process in detail, including the
+loading, scripting, rendering, and painting phases. It also provides a timeline of events, which can be used to
+understand what is happening under the hood. For instance, you can see how long the hydration takes.
+
+Hint:\
+Enable the experimental "timeline-*" features in DevTools settings to see more information about events. It's especially 
+useful for React apps. By default, it's challenging to understand what's really happening because of tons of anonymous
+events.
+
+---
+
+## React Tools
+
+### Why Did You Render
+
+A tool for detecting unnecessary re-renders. It can be used to find components that are re-rendered too often. Write 
+messages to the console.
+
+[link](https://github.com/welldone-software/why-did-you-render)
+
+### React DevTools Profiler
+
+Shows the time spent rendering each component and how many times it was rendered. To observe why it was rendered, 
+enable the "Record why each component rendered while profiling" flag in the settings.
+
+[link](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
 
 ---
 
