@@ -17,6 +17,9 @@ Support and bookmark the project by giving it a star! ⭐
   * [WebPageTest](#webpagetest)
   * [Lighthouse](#lighthouse)
   * [DevTools Performance](#devtools-performance-with-experimental-features)
+* [Monitoring](#monitoring)
+  * [LHCI Server (open-source)](#lhci-server-open-source)
+  * [DebugBear (paid)](#debugbear-paid)
 * [React Tools](#react-tools)
   * [Why Did You Render](#why-did-you-render)
   * [React DevTools Profiler](#react-devtools-profiler)
@@ -91,6 +94,22 @@ Hint:\
 Enable the experimental "timeline-*" features in DevTools settings to see more information about events. It's especially 
 useful for React apps. By default, it's challenging to understand what's really happening because of tons of anonymous
 events.
+
+---
+
+## Monitoring
+
+### LHCI Server (open-source)
+
+Allows you to store historical performance data and see differences between builds. It integrates with CI/CD processes.
+
+[GitHub link](https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/server.md)
+
+### DebugBear (paid)
+
+A tool for monitoring web performance and Lighthouse metrics. It can be used to set up alerts for performance regressions.
+
+[link](https://www.debugbear.com/)
 
 ---
 
