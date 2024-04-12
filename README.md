@@ -10,35 +10,45 @@ Support and bookmark the project by giving it a star! ⭐
 
 ## Table of Contents
 
-* [Tools](#tools)
-  * [Treo — Site Speed](#treo--site-speed)
-  * [Web Vitals (extension)](#web-vitals-extension)
-  * [PageSpeed Insights](#pagespeed-insights)
-  * [WebPageTest](#webpagetest)
-  * [Lighthouse](#lighthouse)
-  * [DevTools Performance](#devtools-performance-with-experimental-features)
-* [Monitoring](#monitoring)
-  * [LHCI Server (open-source)](#lhci-server-open-source)
-  * [DebugBear (paid)](#debugbear-paid)
-* [React Tools](#react-tools)
-  * [Why Did You Render](#why-did-you-render)
-  * [React DevTools Profiler](#react-devtools-profiler)
-* [Learning Resources](#learning-resources)
-  * [Browser Rendering Optimization Course](#browser-rendering-optimization-course)
-  * [Web App Performance Course](#web-app-performance-course)
-* [Metrics](#metrics)
-  * [CLS — Cumulative Layout Shift](#cls)
-  * [DCL — DOMContentLoaded](#dcl)
-  * [FCP — First Contentful Paint](#fcp)
-  * [FID — First Input Delay](#fid)
-  * [FP — First Paint](#fp)
-  * [INP — First Input Delay](#inp)
-  * [L — On Load](#l)
-  * [LCP — Largest Contentful Paint](#lcp)
-  * [SI — Speed Index](#si)
-  * [TBT — Total Blocking Time](#tbt)
-  * [TTI — Time to Interactive](#tti)
-  * [TTFB — Time To First Byte](#ttfb)
+- [Web Performance Handbook](#web-performance-handbook)
+  - [Table of Contents](#table-of-contents)
+  - [Tools](#tools)
+    - [Treo — Site Speed](#treo--site-speed)
+    - [Web Vitals (extension)](#web-vitals-extension)
+    - [PageSpeed Insights](#pagespeed-insights)
+    - [WebPageTest](#webpagetest)
+    - [Lighthouse](#lighthouse)
+    - [DevTools Performance (with experimental features)](#devtools-performance-with-experimental-features)
+  - [Monitoring](#monitoring)
+    - [LHCI Server (open-source)](#lhci-server-open-source)
+    - [DebugBear (paid)](#debugbear-paid)
+  - [Optimizing Bundle](#optimizing-bundle)
+    - [Tools to Analyze](#tools-to-analyze)
+      - [Statoscope](#statoscope)
+      - [Bundle Analyzer](#bundle-analyzer)
+      - [Why?](#why)
+    - [Webpack Alias: Remove 3-rd Party Code from Bundle](#webpack-alias-remove-3-rd-party-code-from-bundle)
+    - [Lazy Code Loading: On Viewport, on Interaction](#lazy-code-loading-on-viewport-on-interaction)
+    - [Deduplication](#deduplication)
+  - [React Tools](#react-tools)
+    - [Why Did You Render](#why-did-you-render)
+    - [React DevTools Profiler](#react-devtools-profiler)
+  - [Learning Resources](#learning-resources)
+    - [Browser Rendering Optimization Course](#browser-rendering-optimization-course)
+    - [Web App Performance Course](#web-app-performance-course)
+  - [Metrics](#metrics)
+    - [CLS](#cls)
+    - [DCL](#dcl)
+    - [FCP](#fcp)
+    - [FID](#fid)
+    - [FP](#fp)
+    - [INP](#inp)
+    - [L](#l)
+    - [LCP](#lcp)
+    - [SI](#si)
+    - [TBT](#tbt)
+    - [TTI](#tti)
+    - [TTFB](#ttfb)
 
 ---
 
@@ -110,6 +120,55 @@ Allows you to store historical performance data and see differences between buil
 A tool for monitoring web performance and Lighthouse metrics. It can be used to set up alerts for performance regressions.
 
 [link](https://www.debugbear.com/)
+
+---
+
+## Optimizing Bundle
+
+### Tools to Analyze
+
+#### Statoscope
+
+Built elaborated report of your bundle. Separates scripts from initial loading and asynchronous loading.
+
+[Github Link](https://github.com/statoscope/statoscope)
+
+#### Bundle Analyzer
+
+[Github Link](https://github.com/webpack-contrib/webpack-bundle-analyzer)
+
+#### Why?
+
+Identifies why a package has been installed. Especially useful for transitive dependencies.
+
+```
+yarn why
+pnpm why
+```
+
+### Webpack Alias: Remove 3-rd Party Code from Bundle
+
+```js
+const mockEmptyModule = path.resolve('./mock-empty-module.js');
+// ...
+config.resolve.alias['reactstrap/lib/Carousel.js'] = mockEmptyModule;
+```
+
+### Lazy Code Loading: On Viewport, on Interaction
+
+The key principle is to avoid including code in the initial load that can be downloaded later. Instead, download it when a user is about to view it in their viewport, during idle time, or at the start of an interaction. 
+
+For React, combine dynamic module import with Suspense.
+
+[real world example](https://dev.to/dsitdikov/my-journey-to-accelerate-load-times-in-heavy-frontend-30c7/)
+
+### Deduplication
+
+```
+yarn dedupe
+npm dedupe
+pnpm dedupe
+```
 
 ---
 
