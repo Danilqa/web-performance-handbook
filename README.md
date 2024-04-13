@@ -30,6 +30,7 @@ Support and bookmark the project by giving it a star! ⭐
     - [Webpack Alias: Remove 3-rd Party Code from Bundle](#webpack-alias-remove-3-rd-party-code-from-bundle)
     - [Lazy Code Loading: On Viewport, on Interaction](#lazy-code-loading-on-viewport-on-interaction)
     - [Deduplication](#deduplication)
+    - [Webpack: Magic Comments on Imports](#webpack-magic-comments-on-imports)
   - [React Tools](#react-tools)
     - [Why Did You Render](#why-did-you-render)
     - [React DevTools Profiler](#react-devtools-profiler)
@@ -141,7 +142,7 @@ Built elaborated report of your bundle. Separates scripts from initial loading a
 
 Identifies why a package has been installed. Especially useful for transitive dependencies.
 
-```
+```sh
 yarn why
 pnpm why
 ```
@@ -164,11 +165,19 @@ For React, combine dynamic module import with Suspense.
 
 ### Deduplication
 
-```
+If it's safe, align the minor versions of installed modules that are duplicated.
+
+```sh
 yarn dedupe
 npm dedupe
 pnpm dedupe
 ```
+
+### Webpack: Magic Comments on Imports
+
+Allows you to rename chunks, regroup, prefetch lazy chunks and more.
+
+[link](https://webpack.js.org/api/module-methods/#magic-comments)
 
 ---
 
