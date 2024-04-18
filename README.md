@@ -22,6 +22,9 @@ Support and bookmark the project by giving it a star! ⭐
   - [Monitoring](#monitoring)
     - [LHCI Server (open-source)](#lhci-server-open-source)
     - [DebugBear (paid)](#debugbear-paid)
+  - [Optimizing Hydration](#optimizing-hydration)
+      - [Disable Hydration](#disable-hydration)
+      - [Server Components](#server-components)
   - [Optimizing Bundle](#optimizing-bundle)
     - [Tools to Analyze](#tools-to-analyze)
       - [Statoscope](#statoscope)
@@ -121,6 +124,25 @@ Allows you to store historical performance data and see differences between buil
 A tool for monitoring web performance and Lighthouse metrics. It can be used to set up alerts for performance regressions.
 
 [link](https://www.debugbear.com/)
+
+---
+
+## Optimizing Hydration
+
+#### Disable Hydration
+
+React has a trick that allows you to disable hydration for a component. The server will render it once, then send an HTML that won't be hydrated. Perfect for static content.
+
+```jsx
+<div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: "" }}/>
+```
+
+It's also available as part of an npm package:
+[react-lazy-hydration](https://www.npmjs.com/package/react-lazy-hydration)
+
+#### Server Components
+
+[more them](https://nextjs.org/docs/app/building-your-application/rendering/server-components)
 
 ---
 
