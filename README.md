@@ -4,9 +4,9 @@
 src="./static/images/logo.png" />
 
 This handbook helps to quickly understand the topic and start improving performance. It contains a metrics glossary, 
-a compilation of useful tools, and a catalog of necessary materials.
+a compilation of useful tools, and a catalog of necessary materials. 
 
-Support and bookmark the project by giving it a star! ⭐
+I really want to share proven knowledge to make the web even better and faster. Support and bookmark the project by giving it a star! ⭐
 
 ## Table of Contents
 
@@ -25,6 +25,9 @@ Support and bookmark the project by giving it a star! ⭐
   - [Optimizing Hydration](#optimizing-hydration)
       - [Disable Hydration](#disable-hydration)
       - [Server Components](#server-components)
+  - [Optimizing Page Load Speed](#optimizing-page-load-speed)
+    - [Image Proxy: Use avif / webp / progressive jpeg](#image-proxy-use-avif--webp--progressive-jpeg)
+    - [Data Compression with brotli](#data-compression-with-brotli)
   - [Optimizing Bundle](#optimizing-bundle)
     - [Tools to Analyze](#tools-to-analyze)
       - [Statoscope](#statoscope)
@@ -143,6 +146,26 @@ It's also available as part of an npm package:
 #### Server Components
 
 [more them](https://nextjs.org/docs/app/building-your-application/rendering/server-components)
+
+---
+
+## Optimizing Page Load Speed
+
+### Image Proxy: Use avif / webp / progressive jpeg
+
+To improve LCP and reduce traffic volume, you can use image proxies or CDNs. They will reformat, resize, and optimize your images on the fly, and cache them immediately.
+
+Possible solutions:
+1. Cloudflare Images
+2. UploadCare
+3. [ImageProxy](https://github.com/imgproxy/imgproxy)
+4. Implement manually: [Good starting point](https://github.com/Danilqa/image-proxy-service).
+
+### Data Compression with brotli
+
+Reduce the size of static files by 15-17% (the exact number is better to calculate using your own resources). The best results can be achieved using brotli with compression level 11. However, the compression time is longer than with gzip (level 9), so it's better to avoid using it on-the-fly and only use pre-compressed or cached versions.
+
+[Comparison table](https://cran.r-project.org/web/packages/brotli/vignettes/brotli-2015-09-22.pdf)
 
 ---
 
