@@ -13,6 +13,7 @@ I really want to share proven knowledge to make the web even better and faster. 
 - [Web Performance Handbook](#web-performance-handbook)
   - [Table of Contents](#table-of-contents)
   - [Tools](#tools)
+    - [Global Stats](#global-stats)
     - [Treo — Site Speed](#treo--site-speed)
     - [Web Vitals (extension)](#web-vitals-extension)
     - [PageSpeed Insights](#pagespeed-insights)
@@ -60,6 +61,12 @@ I really want to share proven knowledge to make the web even better and faster. 
 ---
 
 ## Tools
+
+### Global Stats
+
+Browser market share worldwide. This allows you to see device and browser usage in specific regions.
+
+[link](https://gs.statcounter.com/browser-market-share/)
 
 ### Treo — Site Speed
 
