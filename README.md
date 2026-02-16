@@ -23,6 +23,11 @@ I really want to share proven knowledge to make the web even better and faster. 
   - [Monitoring](#monitoring)
     - [LHCI Server (open-source)](#lhci-server-open-source)
     - [DebugBear (paid)](#debugbear-paid)
+  - [AI Tools](#ai-tools)
+    - [MCP Servers](#mcp-servers)
+      - [Chrome DevTools MCP (Google)](#chrome-devtools-mcp-google)
+    - [AI in Browser DevTools](#ai-in-browser-devtools)
+      - [Chrome DevTools AI Assistance (Gemini)](#chrome-devtools-ai-assistance-gemini)
   - [Optimizing Hydration](#optimizing-hydration)
       - [Disable Hydration](#disable-hydration)
       - [Server Components](#server-components)
@@ -137,6 +142,42 @@ A tool for monitoring web performance and Lighthouse metrics. It can be used to 
 [link](https://www.debugbear.com/)
 
 ---
+
+## AI Tools
+
+### MCP Servers
+
+Tools that let AI coding agents (Claude, Cursor, Copilot, Gemini) run performance audits via 
+[Model Context Protocol](https://modelcontextprotocol.io/).
+
+#### Chrome DevTools MCP (Google)
+
+Official Google MCP server. Lets AI agents control a live Chrome browser: record performance traces, 
+analyze Core Web Vitals (LCP, CLS, INP), inspect network requests, take screenshots, and fetch CrUX 
+field data. The most comprehensive option for AI-driven performance analysis.
+
+[GitHub link](https://github.com/ChromeDevTools/chrome-devtools-mcp)
+
+```json
+{
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"]
+    }
+  }
+}
+```
+
+### AI in Browser DevTools
+
+#### Chrome DevTools AI Assistance (Gemini)
+
+Google's Gemini integrated directly into Chrome DevTools. Helps investigate page performance, analyze 
+traces, debug LCP/CLS/INP issues, explain network request failures, and suggest fixes. Works across 
+Performance, Network, Sources, and Elements panels. Requires Chrome with a Google account.
+
+[link](https://developer.chrome.com/docs/devtools/ai-assistance)
 
 ## Optimizing Hydration
 
