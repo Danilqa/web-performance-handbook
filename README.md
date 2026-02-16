@@ -52,6 +52,7 @@ I really want to share proven knowledge to make the web even better and faster. 
     - [FP](#fp)
     - [INP](#inp)
     - [L](#l)
+    - [LoAF](#loaf)
     - [LCP](#lcp)
     - [SI](#si)
     - [TBT](#tbt)
@@ -80,7 +81,7 @@ and metrics specific to certain user types.
 
 ### Web Vitals (extension)
 
-Collect metrics such as [**INP**](#INP), [LCP](#LCP), [CLS](#CLS), [FIP](#FIP), [FCP](#FCP), and [TTFB](#TTFB) in real-time and easily view them in a popup. 
+Collect metrics such as [**INP**](#INP), [LCP](#LCP), [CLS](#CLS), [FID](#FID), [FCP](#FCP), and [TTFB](#TTFB) in real-time and easily view them in a popup. 
 Enabling logging in options can assist in debugging [INP](#INP).
 
 [link](https://chrome.google.com/webstore/detail/web-vitals/ahfhijdlegdabablpippeagghigmibma/)
@@ -311,12 +312,16 @@ This includes text, images, background images, SVG elements, and non-white canva
 
 ### FID
 
-**First Input Delay**
+**First Input Delay** (Deprecated)
+
+> Deprecated: FID was replaced by [INP](#inp) as a Core Web Vital on March 12, 2024. Chrome stopped reporting 
+> FID in September 2024, including the Web Vitals extension, PageSpeed Insights, and CrUX.
 
 Measurement Unit: Milliseconds (ms)
 
 Measures the time it takes for the browser to respond to a user's first interaction. This interaction can 
-include clicks, hovers, touches, and other user events.
+include clicks, hovers, touches, and other user events. Unlike [INP](#inp), FID only measured the delay of the 
+first interaction, not all interactions throughout the page lifecycle.
 
 [more details](https://web.dev/articles/fid)
 
@@ -349,6 +354,18 @@ It includes all dependent resources: stylesheets, scripts, iframes, and images.
 
 [more details](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event)
 
+### LoAF
+
+**Long Animation Frames**
+
+Measurement Unit: Milliseconds (ms)
+
+Detects frames that take longer than 50ms, providing script-level attribution for what caused the delay. 
+It is the successor to the Long Tasks API and the primary tool for debugging [INP](#inp) issues. Unlike Long Tasks, 
+LoAF shows which scripts ran, how long each took, and includes rendering phases. Supported in Chrome 123+ and Edge 123+.
+
+[more details](https://developer.chrome.com/docs/web-platform/long-animation-frames)
+
 ### LCP
 
 **Largest Contentful Paint**
@@ -358,7 +375,13 @@ Measurement Unit: Milliseconds (ms)
 Measures the time when the largest content block is rendered in the user viewport. The content may include images, 
 background images, SVG, video, and text.
 
-[more details](https://web.dev/articles/lcp)
+LCP can be broken down into four sub-parts for targeted optimization:
+1. [TTFB](#ttfb) — time to first byte of HTML
+2. Resource Load Delay — time from TTFB until the browser starts loading the LCP resource
+3. Resource Load Duration — time to download the LCP resource itself
+4. Element Render Delay — time from when the resource is loaded until the LCP element is painted
+
+[more details](https://web.dev/articles/lcp) | [optimizing sub-parts](https://web.dev/articles/optimize-lcp)
 
 ### SI
 
@@ -385,7 +408,10 @@ usually consumed by virtual DOM renders and hydration.
 
 ### TTI
 
-**Time to Interactive**
+**Time to Interactive** (Deprecated)
+
+> Deprecated: TTI was removed from Lighthouse scoring in Lighthouse 10 (November 2023). It was too sensitive 
+> to outliers and long tasks. Use [TBT](#tbt) as the lab proxy for main-thread blocking instead.
 
 Measurement Unit: Milliseconds (ms)
 
