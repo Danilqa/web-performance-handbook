@@ -15,14 +15,15 @@ I really want to share proven knowledge to make the web even better and faster. 
   - [Tools](#tools)
     - [Global Stats](#global-stats)
     - [Treo — Site Speed](#treo--site-speed)
-    - [Web Vitals (extension)](#web-vitals-extension)
+    - [CrUX Vis](#crux-vis)
     - [PageSpeed Insights](#pagespeed-insights)
     - [WebPageTest](#webpagetest)
     - [Lighthouse](#lighthouse)
-    - [DevTools Performance (with experimental features)](#devtools-performance-with-experimental-features)
+    - [DevTools Performance](#devtools-performance)
   - [Monitoring](#monitoring)
     - [LHCI Server (open-source)](#lhci-server-open-source)
     - [DebugBear (paid)](#debugbear-paid)
+    - [web-vitals (library)](#web-vitals-library)
   - [AI Tools](#ai-tools)
     - [MCP Servers](#mcp-servers)
       - [Chrome DevTools MCP (Google)](#chrome-devtools-mcp-google)
@@ -33,11 +34,16 @@ I really want to share proven knowledge to make the web even better and faster. 
       - [Server Components](#server-components)
   - [Optimizing Page Load Speed](#optimizing-page-load-speed)
     - [Image Proxy: Use avif / webp / progressive jpeg](#image-proxy-use-avif--webp--progressive-jpeg)
-    - [Data Compression with brotli](#data-compression-with-brotli)
+    - [Data Compression with brotli and zstd](#data-compression-with-brotli-and-zstd)
+    - [Fetch Priority](#fetch-priority)
+    - [Speculation Rules: Prefetch and Prerender Next Pages](#speculation-rules-prefetch-and-prerender-next-pages)
+    - [Back/Forward Cache](#backforward-cache)
   - [Optimizing Bundle](#optimizing-bundle)
     - [Tools to Analyze](#tools-to-analyze)
       - [Statoscope](#statoscope)
       - [Bundle Analyzer](#bundle-analyzer)
+      - [Rsdoctor](#rsdoctor)
+      - [Rollup Plugin Visualizer](#rollup-plugin-visualizer)
       - [Why?](#why)
     - [Webpack Alias: Remove 3-rd Party Code from Bundle](#webpack-alias-remove-3-rd-party-code-from-bundle)
     - [Lazy Code Loading: On Viewport, on Interaction](#lazy-code-loading-on-viewport-on-interaction)
@@ -45,6 +51,9 @@ I really want to share proven knowledge to make the web even better and faster. 
     - [Webpack: Magic Comments on Imports](#webpack-magic-comments-on-imports)
   - [React Tools](#react-tools)
     - [Why Did You Render](#why-did-you-render)
+    - [React Scan](#react-scan)
+    - [React Compiler](#react-compiler)
+    - [React Performance Tracks](#react-performance-tracks)
     - [React DevTools Profiler](#react-devtools-profiler)
   - [Learning Resources](#learning-resources)
     - [Browser Rendering Optimization Course](#browser-rendering-optimization-course)
@@ -60,6 +69,7 @@ I really want to share proven knowledge to make the web even better and faster. 
     - [LoAF](#loaf)
     - [LCP](#lcp)
     - [SI](#si)
+    - [Soft Navigations](#soft-navigations)
     - [TBT](#tbt)
     - [TTI](#tti)
     - [TTFB](#ttfb)
@@ -78,18 +88,19 @@ Browser market share worldwide. This allows you to see device and browser usage 
 
 How to view historical performance data of real users?
 
-Allows viewing annual reports for websites based on Light House and CrUX (Chrome User Experience Report) metrics. 
+Allows viewing annual reports for websites based on Lighthouse and CrUX (Chrome User Experience Report) metrics. 
 Filters can also be set, such as internet connection speed, location, and device. Uses real user data. Very useful for observing trends 
 and metrics specific to certain user types.
 
 [link](https://treo.sh/sitespeed)
 
-### Web Vitals (extension)
+### CrUX Vis
 
-Collect metrics such as [**INP**](#INP), [LCP](#LCP), [CLS](#CLS), [FID](#FID), [FCP](#FCP), and [TTFB](#TTFB) in real-time and easily view them in a popup. 
-Enabling logging in options can assist in debugging [INP](#INP).
+The official Google tool to view CrUX data for an origin or a URL. Shows how [LCP](#lcp), [INP](#inp), [CLS](#cls) 
+and other metrics changed over time, split by device. It replaced the CrUX Dashboard (Looker Studio), which was 
+retired at the end of November 2025.
 
-[link](https://chrome.google.com/webstore/detail/web-vitals/ahfhijdlegdabablpippeagghigmibma/)
+[link](https://cruxvis.withgoogle.com/)
 
 ### PageSpeed Insights
 
@@ -114,16 +125,27 @@ It is built into Chrome DevTools and can be also used as a CLI tool, making it e
 performance during CI processes. Additionally, it offers practical suggestions to enhance the quality and loading 
 speed of the page.
 
-### DevTools Performance (with experimental features)
+Since Lighthouse 13 (October 2025), most performance audits are replaced by "insights". They are the same insights 
+that you see in the DevTools Performance panel.
+
+[link](https://developer.chrome.com/docs/lighthouse/overview)
+
+### DevTools Performance
 
 Record and analyze the performance of a page. It allows you to see the loading process in detail, including the
 loading, scripting, rendering, and painting phases. It also provides a timeline of events, which can be used to
 understand what is happening under the hood. For instance, you can see how long the hydration takes.
 
+When you open the panel, it shows live metrics: [LCP](#lcp), [INP](#inp), and [CLS](#cls) of your local session. 
+You can compare them with real user data from CrUX. It replaced the Web Vitals extension, which is no longer supported 
+since Chrome 132 (January 2025).
+
+[link](https://developer.chrome.com/docs/devtools/performance/overview)
+
 Hint:\
-Enable the experimental "timeline-*" features in DevTools settings to see more information about events. It's especially 
-useful for React apps. By default, it's challenging to understand what's really happening because of tons of anonymous
-events.
+By default, it's challenging to understand what's really happening because of tons of anonymous events. 
+Add your own tracks to the timeline with the [extensibility API](https://developer.chrome.com/docs/devtools/performance/extension). 
+For React apps, use [React Performance Tracks](#react-performance-tracks).
 
 ---
 
@@ -140,6 +162,23 @@ Allows you to store historical performance data and see differences between buil
 A tool for monitoring web performance and Lighthouse metrics. It can be used to set up alerts for performance regressions.
 
 [link](https://www.debugbear.com/)
+
+### web-vitals (library)
+
+A small library from Google to collect [LCP](#lcp), [INP](#inp), [CLS](#cls), [FCP](#fcp) and [TTFB](#ttfb) from 
+real users. Send them to your analytics and build your own monitoring. The attribution build shows what caused a 
+bad score. Version 6 (July 2026) can also report metrics for [soft navigations](#soft-navigations) with the 
+`reportSoftNavs: true` option.
+
+```js
+import { onLCP, onINP, onCLS } from 'web-vitals';
+
+onLCP(console.log);
+onINP(console.log);
+onCLS(console.log);
+```
+
+[GitHub link](https://github.com/GoogleChrome/web-vitals)
 
 ---
 
@@ -189,12 +228,11 @@ React has a trick that allows you to disable hydration for a component. The serv
 <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: "" }}/>
 ```
 
-It's also available as part of an npm package:
-[react-lazy-hydration](https://www.npmjs.com/package/react-lazy-hydration)
-
 #### Server Components
 
-[more them](https://nextjs.org/docs/app/building-your-application/rendering/server-components)
+Server Components render only on the server. Their code is not sent to the browser and they are not hydrated.
+
+[more about them](https://nextjs.org/docs/app/getting-started/server-and-client-components)
 
 ---
 
@@ -206,15 +244,64 @@ To improve LCP and reduce traffic volume, you can use image proxies or CDNs. The
 
 Possible solutions:
 1. Cloudflare Images
-2. UploadCare
-3. [ImageProxy](https://github.com/imgproxy/imgproxy)
+2. Uploadcare
+3. [imgproxy](https://github.com/imgproxy/imgproxy)
 4. Implement manually: [Good starting point](https://github.com/Danilqa/image-proxy-service).
 
-### Data Compression with brotli
+JPEG XL is back. It works in Chrome 155+, Firefox 158+ and Safari 17+. Serve it with a fallback to avif / webp 
+for older browsers.
 
-Reduce the size of static files by 15-17% (the exact number is better to calculate using your own resources). The best results can be achieved using brotli with compression level 11. However, the compression time is longer than with gzip (level 9), so it's better to avoid using it on-the-fly and only use pre-compressed or cached versions.
+[JPEG XL in Chrome](https://developer.chrome.com/blog/jpeg-xl-in-chrome)
 
-[Comparison table](https://cran.r-project.org/web/packages/brotli/vignettes/brotli-2015-09-22.pdf)
+### Data Compression with brotli and zstd
+
+Reduce the size of static files by 15-17% (the exact number is better to calculate using your own resources). The best results can be achieved using brotli with compression level 11. However, the compression time is longer than with gzip (level 9). Avoid using it on-the-fly and only use pre-compressed or cached versions.
+
+[Comparison table](https://www.gstatic.com/b/brotlidocs/brotli-2015-09-22.pdf)
+
+zstd is another option. It compresses fast, which makes it a good fit for on-the-fly compression. It works in 
+all major browsers since Safari 26.3 (February 2026).
+
+Compression dictionaries go even further. The browser keeps the old version of a file, and the server uses it as 
+a dictionary to compress the new version. The response becomes much smaller. It's still experimental and works by 
+default only in Chromium-based browsers.
+
+[Compression dictionary transport](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Compression_dictionary_transport)
+
+### Fetch Priority
+
+Tell the browser which resources are more important. For example, raise the priority of the [LCP](#lcp) image 
+and lower it for images that are not visible yet. Works in all major browsers since October 2024.
+
+```html
+<img src="hero.avif" fetchpriority="high" alt="">
+```
+
+[link](https://web.dev/articles/fetch-priority)
+
+### Speculation Rules: Prefetch and Prerender Next Pages
+
+Load the next page before the user clicks a link. With prerender, the browser renders the whole page in the 
+background, and the navigation feels instant. Prerender works only in Chromium-based browsers for now. Safari and 
+Firefox are adding prefetch. Browsers without support ignore the rules.
+
+```html
+<script type="speculationrules">
+{
+  "prerender": [{ "where": { "href_matches": "/*" }, "eagerness": "moderate" }]
+}
+</script>
+```
+
+[link](https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API)
+
+### Back/Forward Cache
+
+The browser can keep a page in memory when the user leaves it. When the user goes back, the page shows instantly. 
+Some things block it, for example `unload` event handlers. Use `pagehide` instead. To see what blocks it on your 
+page, open DevTools → Application → Back/forward cache.
+
+[link](https://web.dev/articles/bfcache)
 
 ---
 
@@ -224,13 +311,26 @@ Reduce the size of static files by 15-17% (the exact number is better to calcula
 
 #### Statoscope
 
-Built elaborated report of your bundle. Separates scripts from initial loading and asynchronous loading.
+Builds a detailed report of your bundle. Separates scripts from initial loading and asynchronous loading.
 
 [Github Link](https://github.com/statoscope/statoscope)
 
 #### Bundle Analyzer
 
 [Github Link](https://github.com/webpack-contrib/webpack-bundle-analyzer)
+
+#### Rsdoctor
+
+A build analyzer for Rspack. Shows the bundle content, duplicated packages, and which loaders and plugins slow down 
+the build. For webpack, use Rsdoctor 1.x.
+
+[link](https://rsdoctor.rs/)
+
+#### Rollup Plugin Visualizer
+
+A bundle analyzer for Vite and Rollup. Shows the bundle as a treemap, sunburst, flamegraph, or network graph.
+
+[Github Link](https://github.com/btd/rollup-plugin-visualizer)
 
 #### Why?
 
@@ -284,12 +384,34 @@ messages to the console.
 
 [link](https://github.com/welldone-software/why-did-you-render)
 
+### React Scan
+
+Finds unnecessary re-renders and highlights them right on the page. Works without code changes: add a script tag 
+or set it up with `npx react-scan@latest init`.
+
+[link](https://github.com/aidenybai/react-scan)
+
+### React Compiler
+
+Memoizes components and values automatically at build time. You don't need to write `useMemo`, `useCallback` 
+and `memo` by hand. Most unnecessary re-renders go away. Stable since version 1.0 (October 2025).
+
+[link](https://react.dev/blog/2025/10/07/react-compiler-1)
+
+### React Performance Tracks
+
+React 19.2 adds its own tracks to the DevTools Performance panel. The Scheduler track shows what React is working 
+on and with which priority. The Components track shows which components render and how long it takes. Available 
+in development and profiling builds.
+
+[link](https://react.dev/reference/dev-tools/react-performance-tracks)
+
 ### React DevTools Profiler
 
 Shows the time spent rendering each component and how many times it was rendered. To observe why it was rendered, 
 enable the "Record why each component rendered while profiling" flag in the settings.
 
-[link](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
+[link](https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
 
 ---
 
@@ -305,7 +427,7 @@ Provides a solid basis for understanding how a browser renders a document and wh
 
 Reveals many subtleties and working practices about optimization that are not usually written about. 
 
-[link](https://frontendmasters.com/courses/web-app-performance/)
+[link](https://master.dev/courses/web-app-performance/)
 
 ---
 
@@ -315,6 +437,17 @@ This is a list of the most common metrics which may appear in articles, DevTools
 various tools for working with web performance. Everything is sorted in the alphabetical order.
 
 The factual data is primarily sourced from MDN, web.dev and w3c, however the short description has been rewritten and enhanced.
+
+Core Web Vitals are [LCP](#lcp), [INP](#inp) and [CLS](#cls). Good values (for 75% of page visits):
+
+| Metric | Good | Poor |
+|--------|------|------|
+| LCP | ≤ 2.5 s | > 4 s |
+| INP | ≤ 200 ms | > 500 ms |
+| CLS | ≤ 0.1 | > 0.25 |
+
+LCP and INP work in all major browsers since Safari 26.2 (December 2025). CLS still works only in Chromium-based 
+browsers.
 
 
 ### CLS
@@ -435,6 +568,19 @@ by the area above the curve, which will approach 0 as the page loads faster.
 
 [more details](https://developer.mozilla.org/en-US/docs/Glossary/Speed_index)
 
+### Soft Navigations
+
+**Soft Navigations and Interaction Contentful Paint**
+
+Measurement Unit: Milliseconds (ms)
+
+In single-page apps, the URL changes without a full page load. Before, [LCP](#lcp), [INP](#inp) and [CLS](#cls) 
+were tied to the first page load. Since Chrome 151 (July 2026), the browser detects these "soft navigations". 
+Now you can measure metrics for each of them. The new `interaction-contentful-paint` entry shows when new content is 
+painted after an interaction. Works only in Chromium-based browsers.
+
+[more details](https://developer.chrome.com/docs/web-platform/soft-navigations)
+
 ### TBT
 
 **Total Blocking Time**
@@ -451,12 +597,12 @@ usually consumed by virtual DOM renders and hydration.
 
 **Time to Interactive** (Deprecated)
 
-> Deprecated: TTI was removed from Lighthouse scoring in Lighthouse 10 (November 2023). It was too sensitive 
+> Deprecated: TTI was removed from Lighthouse scoring in Lighthouse 10 (February 2023). It was too sensitive 
 > to outliers and long tasks. Use [TBT](#tbt) as the lab proxy for main-thread blocking instead.
 
 Measurement Unit: Milliseconds (ms)
 
-Measures the time when than at least for 5 seconds where weren't long tasks (>50ms) and
+Measures the time when the page starts a quiet window of at least 5 seconds: no long tasks (>50ms) and
 no more than two in-flight network GET requests.
 
 [more details](https://web.dev/articles/tti)
